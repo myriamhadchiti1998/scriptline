@@ -1,0 +1,214 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# CLIENT CONFIG — Marcus Vane / The Sovereign Storefront
+#
+# This file is the *structured* layer of the client's context. The prose
+# Reference Pack (reference_pack.md, same folder) is injected into every prompt
+# verbatim; this YAML holds the machine-checkable facts the quality gate
+# enforces deterministically (proof IDs, allowed numbers, banned language, CTAs).
+#
+# Adding a new client = copy this folder, swap reference_pack.md, edit this file.
+# No prompt or code changes are needed.
+# ─────────────────────────────────────────────────────────────────────────────
+
+id: sovereign_storefront
+display_name: "Marcus Vane — The Sovereign Storefront"
+spokesperson: "Marcus Vane"
+product: "The Sovereign Storefront"
+member_term: "members"            # what the audience is called in copy
+
+# ── Funnel & CTAs ────────────────────────────────────────────────────────────
+funnel:
+  landing_page: "sovereignstorefront.dummy/first-pallet"
+  front_end_offer: "$1 two-hour \"First Pallet\" trial workshop"
+  stages:
+    cold:
+      description: >-
+        Cold traffic (Facebook/YouTube/TikTok). Prospect is solution-aware but
+        scarred. Lead with the internal state (emotional hook families 1-4),
+        explain the mechanism, let the offer arrive late. CTA = low-commitment
+        $1 workshop. Never pitch the Core/Concierge upsell price.
+      primary_cta: "Watch the First Pallet workshop for $1. See exactly how it works, then decide."
+      alternate_ctas: ["Grab a $1 seat"]
+      # The CTA section must contain >=1 term from EACH group (case-insensitive)
+      required_cta_terms:
+        - ["$1", "a dollar", "one dollar"]
+        - ["workshop", "first pallet", "seat"]
+    retargeting:
+      description: >-
+        Retargeting / mid-funnel. Prospect is product-aware (has seen the ad or
+        page). Mechanism-first and procedural hooks are allowed here. Handle
+        objections directly. Organic urgency only (lots refresh weekly).
+      primary_cta: "See this week's matched inventory."
+      alternate_ctas: ["Grab a $1 seat", "Watch the First Pallet workshop for $1. See exactly how it works, then decide."]
+      required_cta_terms:
+        - ["$1", "a dollar", "one dollar", "this week's matched", "match sheet", "matched inventory", "workshop", "first pallet", "seat"]
+
+# ── Avatars (ideas must target exactly one) ──────────────────────────────────
+avatars:
+  - id: dana
+    label: "Dana, the Burned Earner (49, Ohio)"
+    key_phrase: "What's the catch this time?"
+    core_pains: ["burned by a ~$2,400 dropshipping course she never finished", "skeptical spouse", "distrusts her own judgment"]
+  - id: lorraine
+    label: "Lorraine, the Anxious Near-Retiree (58, rural England)"
+    key_phrase: "Can someone like me actually do this?"
+    core_pains: ["worried savings won't stretch", "low tech confidence", "wants a small real project with dignity"]
+  - id: theo
+    label: "Theo, the Time-Strapped Contractor (41, Texas)"
+    key_phrase: "Will this waste my time?"
+    core_pains: ["no spare hours", "needs exact steps", "won't spend six months guessing"]
+  - id: ray
+    label: "Ray, the Methodical Skeptic (46, Canada)"
+    key_phrase: "Walk me through the economics."
+    core_pains: ["looks for the catch", "needs the incentives to line up", "reads the fine print"]
+  - id: marisol
+    label: "Marisol, the Restarting Parent (44, Arizona)"
+    key_phrase: "Is this something I could be proud of?"
+    core_pains: ["one income household", "wants to contribute again", "wants a thing that's hers"]
+
+creative_types: ["talking-head", "UGC", "listicle", "story", "demo", "objection-handler", "founder-confessional"]
+lead_types: ["problem-led", "proof-led", "curiosity-led", "offer-led"]
+hook_families:
+  - "F1 Identity & Belonging"
+  - "F2 Cost of Inaction & Fear"
+  - "F3 Story & Transformation (Marcus, first person)"
+  - "F4 Enemy / Contrarian"
+  - "Belief hooks (Hopeless / Helpless / Worthless)"
+  - "Avatar hooks"
+  - "LAB profile hooks"
+  - "Mechanism / procedural (retargeting only)"
+
+# ── PROOF BANK ───────────────────────────────────────────────────────────────
+# The ONLY proof the system may use. Every idea cites proof IDs from this list;
+# every factual claim in a script must map to one of these IDs. Unknown IDs are
+# rejected by code before anything reaches the human approver or the client.
+proof_bank:
+  - id: C1
+    type: credential
+    text: "Marcus spent 14 years managing a regional wholesale logistics depot."
+  - id: C2
+    type: credential
+    text: "11 vetted regional liquidator partners under signed placement agreements (never named in ads)."
+  - id: C3
+    type: credential
+    text: "5 years running the Sovereign Storefront program; weekly match sheets running continuously for 5 years."
+  - id: C4
+    type: scale
+    text: "9,400+ enrolled members across the US, Canada, UK, and Australia."
+  - id: C5
+    type: credential
+    text: "Featured speaker at the 2024 Midwest Reseller Summit."
+  - id: C6
+    type: credential
+    text: "Named one of \"30 Operators to Watch\" by trade outlet Backroom Logistics Weekly."
+  - id: M1
+    type: mechanism
+    text: "Regional liquidators pay Marcus a placement fee only when member stores actually move their inventory — members don't pay him up front for results; his income depends on their stores working (aligned incentive, quality is self-correcting)."
+  - id: M2
+    type: mechanism
+    text: "The Liquidator Match sheet: a weekly-refreshed list of overstock and returned-inventory lots the partners most need to clear, matched to store types, so members start with inventory that already has demand behind it."
+  - id: M3
+    type: mechanism
+    text: "Done-with-you cataloguing system plus listing, pricing, and returns templates; an evenings-sized weekly workload (\"a few evenings a week\")."
+  - id: M4
+    type: anti-claim
+    text: "Marcus makes no income claims and says anyone who promises a figure shouldn't be trusted (the refusal to promise is itself the proof)."
+  - id: M5
+    type: audience-fact
+    text: "The core membership skews 45–55."
+  - id: O1
+    type: offer
+    text: "$1 two-hour \"First Pallet\" workshop (stated value $299) walks the full mechanism end to end, live. Bundle: Liquidator Match sample sheet ($149), Store Starter template kit ($199), \"Boring Economics\" workbook ($99). Total stated value $746 for $1."
+  - id: O2
+    type: offer
+    text: "Organic urgency only: liquidator lots genuinely refresh weekly."
+  - id: T1
+    type: testimonial
+    person: "Dana R."
+    descriptor: "Office admin, Ohio, 49, burned by a prior dropshipping course"
+    quote: "I was sure this was another version of the thing that cost me $2,400. Then he explained who actually pays him and it clicked. I have a real store now, not a folder of unwatched videos."
+  - id: T2
+    type: testimonial
+    person: "Theo M."
+    descriptor: "Contractor, Texas, 41, no spare time"
+    quote: "I do my listings after the kids are down. The match sheet means I'm not staring at a screen wondering what to sell."
+  - id: T3
+    type: testimonial
+    person: "Lorraine P."
+    descriptor: "Semi-retired, England, 58, very low tech confidence"
+    quote: "I'm not a computer person and I got my first lot listed with the template. The fact he never promised me money is exactly why I trusted him."
+  - id: T4
+    type: testimonial
+    person: "Ray C."
+    descriptor: "Analyst, Canada, 46, skeptic"
+    quote: "I went in looking for the catch. The catch is that you have to actually do the weekly work. The economics hold up, which is more than I can say for the last three."
+  - id: T5
+    type: testimonial
+    person: "Marisol V."
+    descriptor: "Restarting parent, Arizona, 44"
+    quote: "I wanted something that was mine again. I've got a little corner of the garage with labeled bins and a store with my name on it. That's the part that got me."
+
+# ── FACT ALLOWLISTS (deterministic anti-fabrication gate) ────────────────────
+# Any number, dollar figure, or percentage in a script that is not listed here
+# fails checklist item 8 automatically, regardless of what the AI reviewer says.
+facts:
+  allowed_numbers: [1, 2, 3, 4, 5, 11, 14, 20, 22, 25, 30, 38, 40, 41, 44, 45, 46, 49, 50, 52, 55, 58, 60, 75, 90, 200, 2024, 9400]
+  allowed_dollar_amounts: [1, 99, 149, 197, 199, 299, 497, 746, 1450, 2400, 6800]
+  allowed_percentages: []          # internal market data — never in ad copy
+  # Proper nouns the scripts may use. Anything else that looks like a name is
+  # flagged for the AI reviewer to verify against the Reference Pack.
+  allowed_proper_nouns:
+    [Marcus, Vane, Sovereign, Storefront, Dana, Theo, Lorraine, Ray, Marisol,
+     Ohio, Texas, England, Canada, Arizona, US, UK, Australia, America,
+     United, States, Kingdom,
+     First, Pallet, Liquidator, Match, Core, Concierge, Boring, Economics,
+     Store, Starter, Midwest, Reseller, Summit, Backroom, Logistics, Weekly,
+     Operators, Watch, Method, Facebook, YouTube, TikTok, FBA, Amazon, FTC,
+     Step, Hook, I, I'm, I've, I'd, I'll]
+  # Entities whose appearance is an automatic fabrication fail (never in pack).
+  forbidden_entities:
+    [Walmart, Target, Costco, "Home Depot", Forbes, "Shark Tank", CNN, "Fox News",
+     "Wall Street", Inc., "Entrepreneur magazine", Oprah, Harvard, Shopify, eBay,
+     Etsy, "Facebook Marketplace", Craigslist, Poshmark, Mercari, "as seen on"]
+
+# ── LANGUAGE RULES (from Reference Pack §06 / §10) ───────────────────────────
+# level: hard  → automatic fail of the named checklist item
+# level: flag  → passed to the AI reviewer as "inspect this in context"
+#               (e.g. "I won't insult you by calling it passive" is on-brand)
+# negatable: if true, a negator in the preceding words (not/never/won't/no/
+#            insult/without...) downgrades the hit to "ok".
+language_rules:
+  - {pattern: '\b(make|making|made|earn|earning|earned|pull(?:ing)? in|bring(?:ing)? in|clear(?:ing)?)\s+(?:up to\s+|over\s+|about\s+)?\$\s?\d[\d,]*(?:\s?k\b)?', level: hard, item: 8, reason: "Earnings claim (dollar figure tied to what someone makes)"}
+  - {pattern: '\$\s?\d[\d,]*\s*(?:k\b)?\s*(?:/|per|a|an|every)\s*(?:day|week|month|year|hour|hr)\b', level: hard, item: 8, reason: "Earnings rate claim ($X per period)"}
+  - {pattern: '\b(?:six|seven|five|multi)[- ]figures?\b', level: hard, item: 8, reason: "Income-figure language"}
+  - {pattern: '\bmillions?\b', level: hard, item: 7, reason: "Get-rich language (millions)"}
+  - {pattern: '\bstudents?\b', level: hard, item: 7, reason: "Audience must be called 'members', never students"}
+  - {pattern: '\bpassive(?:\s+income)?\b', level: hard, item: 7, negatable: true, reason: "Promises 'passive' (brand frame is 'a few evenings a week')"}
+  - {pattern: '\bauto[- ]?pilot\b', level: hard, item: 7, negatable: true, reason: "Autopilot promise"}
+  - {pattern: '\b(?:fire your boss|laptop lifestyle|wage slave|money[- ]printing|guaranteed results|get rich quick)\b', level: hard, item: 7, reason: "Guru / hype language listed as off-brand"}
+  - {pattern: '\b(?:spots? (?:are )?(?:almost gone|left|remaining)|only \d+ (?:spots|seats)|before (?:it''s|its) too late|price goes up)\b', level: hard, item: 7, reason: "Fake scarcity / urgency theatre"}
+  - {pattern: '\b(?:lambo(?:rghini)?s?|mansions?|yachts?|private jet)\b', level: flag, item: 7, reason: "Luxury imagery — only acceptable as an explicit contrast (Marcus has none)"}
+  - {pattern: '\b(?:financial freedom|quit your job|set it and forget it|while you sleep|effortless|no work required|easiest|so easy)\b', level: flag, item: 7, negatable: true, reason: "Avoid-list phrase — acceptable only when quoting/contrasting the hype model"}
+  - {pattern: '\b(?:countdown|timer|act now|hurry|limited time)\b', level: flag, item: 7, negatable: true, reason: "Urgency language — must be organic (weekly lot refresh) or a contrast"}
+  - {pattern: '\b(?:profit|revenue|income)\b', level: flag, item: 8, negatable: true, reason: "Money word — must not imply what a member will make"}
+  - {pattern: '\b(?:guarantee[ds]?|proven to)\b', level: flag, item: 8, negatable: true, reason: "Guarantee language — the brand device is the anti-guarantee"}
+
+# ── VOICE & RHYTHM thresholds (deterministic half of checklist item 7) ───────
+voice:
+  max_exclamation_marks: 0          # "Calm — no exclamation storms"
+  max_all_caps_words: 0             # "no all-caps" (acronyms below are exempt)
+  caps_exempt: [US, UK, FBA, FTC, CTA, OK, TV]
+  avg_sentence_words: [6, 17]       # plainspoken, unhurried: short declaratives
+  max_sentence_words: 32
+  signature_phrases_hint: >-
+    "Boring on purpose. Boring is what survives." · "A few evenings a week. I'm
+    not going to insult you by calling it passive." · "The liquidators pay me."
+
+# ── SCRIPT LENGTH (checklist item 6) ─────────────────────────────────────────
+script:
+  words_per_second: 2.5             # ~150 wpm, calm delivery
+  min_seconds: 60
+  max_seconds: 180
+  target_words: [190, 380]          # A-roll = one hook + main body
+  hook_first_sentence_max_words: 20 # pattern interrupt must land in ~3 seconds
+  max_hook_similarity: 0.5          # three hooks must be genuinely distinct

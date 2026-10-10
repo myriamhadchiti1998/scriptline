@@ -1,0 +1,7 @@
+anthropic>=1.13,<2
+fastapi>=0.115
+uvicorn>=0.30
+pydantic>=2.7
+python-docx>=1.1
+PyYAML>=6.0
+pytest>=8.0
